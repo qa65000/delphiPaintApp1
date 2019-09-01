@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   System.Generics.Collections,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Layouts;
 
 type
   { Lineを表示するための位置への情報 ssStart = 開始, ssNext= 継続　, ssEnd =終端 }
@@ -17,8 +18,8 @@ type
           Status  : TLineStatus;
   end;
   PLinePoint = ^TLinePoint;
-
   TMainForm = class(TForm)
+    Layout1: TLayout;
     PaintBox1: TPaintBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -46,8 +47,6 @@ var
 implementation
 
 {$R *.fmx}
-
-
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
@@ -80,7 +79,6 @@ begin
        AddPoint( x, y ,sStart);   { 描画用の点設定:開始}
      end;
 end;
-
 
 procedure TMainForm.PaintBox1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
@@ -128,6 +126,5 @@ begin
                 end;
         end;
 end;
-
 
 end.
