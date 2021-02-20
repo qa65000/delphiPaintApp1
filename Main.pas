@@ -65,7 +65,7 @@ begin
         if(DrawPoints.Count < 0 ) then exit;   { マイナスはあり得ない }
 
         TLP.Positon := PointF(x, y);           { 設定データ仮作成 }
-        TLP.Status  := Status;
+        TLP.Status  := Status;                 { ラインステータスを保存 }
         DrawPoints.Add(TLP);                   { Listに追加 }
         PaintBox1.Repaint;                     { 再描画 }
 end;
@@ -73,31 +73,31 @@ end;
 procedure TMainForm.PaintBox1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
-     if ssLeft in Shift then      { 左ボタン押している？ }
+     if ssLeft in Shift then      { 左ボタン押している?}
      begin
        PressStatus := True;       { 左ボタン押し状態設定 }
-       AddPoint( x, y ,sStart);   { 描画点設定:開始}
+       AddPoint( x, y ,sStart);   { ラインステータス:開始でリスト追加}
      end;
 end;
 
 procedure TMainForm.PaintBox1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Single);
 begin
-     if ssLeft in Shift then      { 左ボタン押している？ }
+     if ssLeft in Shift then      { 左ボタン押している?}
      begin
        if(PressStatus =  True) then  { 押し検出済み?}
-       AddPoint( x, y ,sNext);   { 描画点設定:継続}
+       AddPoint( x, y ,sNext);    { ラインステータス:継続でリスト追加}
      end;
 end;
 
 procedure TMainForm.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Single);
 begin
-    if(PressStatus =  True) then
+    if(PressStatus =  True) then  { 左ボタン押していた？ }
     begin
-       AddPoint( x, y ,sEnd);   { 描画点設定:終端}
+       AddPoint( x, y ,sEnd);     { ラインステータス:終端でリスト追加}
     end;
-    PressStatus := false;       {押し状態を解除}
+    PressStatus := false;         {押し状態を解除}
 end;
 
 procedure TMainForm.PaintBox1Paint(Sender: TObject; Canvas: TCanvas);
