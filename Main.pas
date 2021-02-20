@@ -9,10 +9,10 @@ uses
   FMX.Layouts;
 
 type
-  { Lineを表示するための位置への情報 ssStart = 開始, ssNext= 継続　, ssEnd =終端 }
+  { Lineを表示するための位置への情報 sStart = 開始, sNext= 継続　, sEnd =終端 }
  TLineStatus = (sStart, sNext, sEnd);
 
-  { Line 描画の位置、Statusを構造体として定義}
+  { Line 描画点、Status、構造体として定義}
   TLinePoint = record
           Positon : TPointF;
           Status  : TLineStatus;
@@ -50,12 +50,12 @@ implementation
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-    DrawPoints := TList<TLinePoint>.Create;  { 描画用の点リストの構築 }
+    DrawPoints := TList<TLinePoint>.Create;  { 描画点リストの構築 }
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-  DrawPoints.DisposeOf;   { 描画用の点リストの破棄 }
+  DrawPoints.DisposeOf;   { 描画点リストの破棄 }
 end;
 
 procedure TMainForm.AddPoint(const x, y: single; const Status: TLineStatus);
@@ -76,7 +76,7 @@ begin
      if ssLeft in Shift then      { 左ボタン押している？ }
      begin
        PressStatus := True;       { 左ボタン押し状態設定 }
-       AddPoint( x, y ,sStart);   { 描画用の点設定:開始}
+       AddPoint( x, y ,sStart);   { 描画点設定:開始}
      end;
 end;
 
@@ -86,7 +86,7 @@ begin
      if ssLeft in Shift then      { 左ボタン押している？ }
      begin
        if(PressStatus =  True) then  { 押し検出済み?}
-       AddPoint( x, y ,sNext);   { 描画用の点設定:継続}
+       AddPoint( x, y ,sNext);   { 描画点設定:継続}
      end;
 end;
 
@@ -95,7 +95,7 @@ procedure TMainForm.PaintBox1MouseUp(Sender: TObject; Button: TMouseButton;
 begin
     if(PressStatus =  True) then
     begin
-       AddPoint( x, y ,sEnd);   { 描画用の点設定:終端}
+       AddPoint( x, y ,sEnd);   { 描画点設定:終端}
     end;
     PressStatus := false;       {押し状態を解除}
 end;
