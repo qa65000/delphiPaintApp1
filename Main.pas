@@ -12,7 +12,7 @@ type
   { Lineを表示するための位置への情報 sStart = 開始, sNext= 継続　, sEnd =終端 }
  TLineStatus = (sStart, sNext, sEnd);
 
-  { Line 描画点、Status、構造体として定義}
+  { Line 描画点、Status、レコード型(構造体)として定義}
   TLinePoint = record
           Positon : TPointF;
           Status  : TLineStatus;
@@ -125,6 +125,7 @@ begin
                         end;
                 end;
         end;
+
 end;
 
 end.
